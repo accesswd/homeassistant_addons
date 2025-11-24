@@ -1,0 +1,12 @@
+name: "Access Remote Tunnel"
+version: "1.0.0"
+slug: access_home_remote
+description: "Access and control your home from anywhere, securely and easily."
+arch:
+  - aarch64
+startup: "initialize"
+boot: "auto"
+map:
+  - type: homeassistant_config
+    read_only: false
+    path: /config
