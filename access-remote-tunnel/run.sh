@@ -43,7 +43,7 @@ if ! grep -q '^http:' "$CONFIG_FILE"; then
     echo -e "\nhttp:" >> "$CONFIG_FILE"
     echo "  use_x_forwarded_for: true" >> "$CONFIG_FILE"
     echo "  trusted_proxies:" >> "$CONFIG_FILE"
-    echo "    - 172.17.0.0/16" >> "$CONFIG_FILE"
+    echo "    - 0.0.0.0/0" >> "$CONFIG_FILE"
 else
     # Add use_x_forwarded_for if missing in http: block
     if ! sed -n '/^http:/,/^[^ ]/p' "$CONFIG_FILE" | grep -q 'use_x_forwarded_for:'; then
@@ -52,13 +52,13 @@ else
 
     # Add trusted_proxies if missing
     if ! sed -n '/^http:/,/^[^ ]/p' "$CONFIG_FILE" | grep -q 'trusted_proxies:'; then
-        sed -i '/^http:/a\  trusted_proxies:\n    - 172.17.0.0/16' "$CONFIG_FILE"
+        sed -i '/^http:/a\  trusted_proxies:\n    - 0.0.0.0/0' "$CONFIG_FILE"
     fi
 fi
 
 # Ensure 0.0.0.0/0 exists under trusted_proxies
-if ! sed -n '/^http:/,/^[^ ]/p' "$CONFIG_FILE" | grep -q '172.17.0.0/16'; then
-    sed -i '/trusted_proxies:/a\    - 172.17.0.0/16' "$CONFIG_FILE"
+if ! sed -n '/^http:/,/^[^ ]/p' "$CONFIG_FILE" | grep -q '0.0.0.0/0'; then
+    sed -i '/trusted_proxies:/a\    - 0.0.0.0/0' "$CONFIG_FILE"
 fi
 
 
