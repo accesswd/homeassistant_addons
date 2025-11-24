@@ -1,6 +1,6 @@
-name: "Access Remote Tunnel"
+name: "Access Remote Connect"
 version: "1.0.0"
-slug: access_home_remote
+slug: access_remote_connect
 description: "Access and control your home from anywhere, securely and easily."
 arch:
   - aarch64
